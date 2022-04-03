@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-      <link rel="stylesheet" type="text/css" href="app.css" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="app.css" />
 
-      <title>Debounce example</title>
-   </head>
-   <body>
-      <h1>Debounce example</h1>
-      <article>
-         <section>
-            <h2>Debounce handler</h2>
-            <p>Debouncing is a form of rate-limiting to prevent some action
-               being taken more often than necessary.  Mostly on a website
-               this is used on form inputs where a user may type several
-               characters and have costly actions performed (like search
-               suggestions).  The idea here is that a set amount of time
-               after the last character has been entered, do we actually
-               do the action (searching, etc).
-            </p>
-            <p>
-               Enter some text and a second after your <em>last</em> keypress,
-               a little message will appear briefly:
-               <input type="text" class="debounce__input">
-               <span class="debounce__activity alert alert--success fader">Bounced!</span>
-            </p>
-            <pre>const CreateDebounce = (callback, timeout = 300) => {
+        <title>Debounce example</title>
+    </head>
+    <body>
+        <h1>Debounce example</h1>
+        <article>
+            <section>
+                <h2>Debounce handler</h2>
+                <p>Debouncing is a form of rate-limiting to prevent some action
+                being taken more often than necessary.  Mostly on a website
+                this is used on form inputs where a user may type several
+                characters and have costly actions performed (like search
+                suggestions).  The idea here is that a set amount of time
+                after the last character has been entered, do we actually
+                do the action (searching, etc).
+                </p>
+                <p>
+                Enter some text and a second after your <em>last</em> keypress,
+                a little message will appear briefly:
+                <input type="text" class="debounce__input">
+                <span class="debounce__activity alert alert--success fader">Bounced!</span>
+                </p>
+                <pre>const CreateDebounce = (callback, timeout = 300) => {
    let timeoutId;
    return () => {
       clearTimeout(timeoutId);
@@ -35,36 +35,42 @@
    }
 }</pre>
 
-            <p>That's the core of it. This is a really simple function
-               that holds 2 pieces of state: a timeout ID returned by the 
-               <code>window.setTimeout</code> function, and the timeout passed 
-               in when creating the debounce. When the inner function is called,
-               we just reset the timer to make sure the callback function isn't 
-               called, then set a new timer that will trigger later.  The end 
-               result being that after the final keypress by the user, after
-               <code>timeout</code> milliseconds, the callback function we 
-               passed in is executed.
-            </p>
+                <p>That's the core of it. This is a really simple function
+                that holds 2 pieces of state: a timeout ID returned by the 
+                <code>window.setTimeout</code> function, and the timeout passed 
+                in when creating the debounce. When the inner function is called,
+                we just reset the timer to make sure the callback function isn't 
+                called, then set a new timer that will trigger later.  The end 
+                result being that after the final keypress by the user, after
+                <code>timeout</code> milliseconds, the callback function we 
+                passed in is executed.
+                </p>
 
-            <p>
-               Usage is slightly longer winded, but simple enough.  First we'll
-               create a callback function.  In this demo it'll just give us an
-               alert, but it would really be your long-lived ajax request or
-               heavy data process.  Next we create the Debounce object by
-               passing in our callback and the timeout (300ms is a good value
-               for key presses, any longer and you can really "feel" it, any 
-               less and slow typers won't get the benefit from it). Finally,
-               set the event handler on your element to the debounce function:</p>
+                <p>
+                Usage is slightly longer winded, but simple enough.  First we'll
+                create a callback function.  In this demo it'll just give us an
+                alert, but it would really be your long-lived ajax request or
+                heavy data process.  Next we create the Debounce object by
+                passing in our callback and the timeout (300ms is a good value
+                for key presses, any longer and you can really "feel" it, any 
+                less and slow typers won't get the benefit from it). Finally,
+                set the event handler on your element to the debounce function:</p>
 
-            <pre>const DebounceCallback = () => {
+                <pre>const DebounceCallback = () => {
    alert('I have debounced!');
 }
 
 const Debounce = CreateDebounce(DebounceCallback,1000);
 
 document.querySelector('.debounce__input').addEventListener('keyup', Debounce);</pre>
-         </section>
-      </article>
-      <script type="text/javascript" src="app.js"></script>
-   </body>
+
+                <p>
+                    It should be obvious that this is a pure javascript feature, no specific CSS or HTML
+                    is required, other than stitching together a UI element to the Debounce feature if
+                    needed for your implementation.
+                </p>
+            </section>
+        </article>
+        <script type="text/javascript" src="debounce.js"></script>
+    </body>
 </html>
